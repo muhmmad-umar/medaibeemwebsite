@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Media Beem | Performance Marketing for E-commerce Brands</title>
+<meta name="description" content="Media Beem is a performance marketing agency that helps e-commerce brands scale profitably with Meta ads, creative strategy, influencer marketing and marketing automation." />
+<meta name="theme-color" content="#07090d" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* =========================================================
+     THEME — change the accent in ONE place: --accent (+ its RGB)
+     ========================================================= */
+  :root {
+    --accent: #2BFF88;          /* Electric "beam" green */
+    --accent-rgb: 43, 255, 136; /* Same color as R, G, B (used for glows) */
+    --accent-ink: #04120a;      /* Text color on top of the accent */
+
+    --bg: #07090d;
+    --bg-2: #0c1017;
+    --surface: #11161f;
+    --surface-2: #161c27;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --text: #eef2f7;
+    --muted: #9aa5b5;
+    --dim: #6b7585;
+
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+    --radius: 18px;
+    --radius-sm: 12px;
+    --container: 1180px;
+    --gutter: 20px;
+    --header-h: 68px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .section { padding: 88px 0; position: relative; }
+  .accent { color: var(--accent); }
+  .ph { color: var(--accent); font-weight: 600; } /* placeholder highlight */
+
+  h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.02em; font-weight: 700; }
+  h1 { font-size: clamp(2.5rem, 8vw, 5.25rem); }
+  h2 { font-size: clamp(2rem, 5.4vw, 3.4rem); }
+  h3 { font-size: 1.3rem; letter-spacing: -0.01em; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+  .section-head { max-width: 760px; margin-bottom: 52px; }
+  .section-head p { color: var(--muted); font-size: 1.08rem; margin-top: 18px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 0 26px; border-radius: 999px;
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+    transition: transform .2s ease, box-shadow .25s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn svg { width: 18px; height: 18px; transition: transform .2s ease; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px -8px rgba(var(--accent-rgb), .6); }
+  .btn-ghost { background: rgba(255,255,255,.03); border-color: var(--border-strong); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-sm { min-height: 42px; padding: 0 18px; font-size: .92rem; }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--header-h);
+    display: flex; align-items: center;
+    transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .header.scrolled { background: rgba(7, 9, 13, .78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: var(--border); }
+  .header .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+  .logo-mark { width: 30px; height: 30px; flex: none; }
+  .nav-links { display: none; gap: 30px; font-size: .93rem; color: var(--muted); }
+  .nav-links a { transition: color .2s ease; }
+  .nav-links a:hover { color: var(--text); }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .menu-toggle {
+    width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border-strong);
+    background: transparent; cursor: pointer; display: grid; place-items: center;
+  }
+  .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after {
+    display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; position: relative; transition: transform .25s ease, background .25s ease;
+  }
+  .menu-toggle span::before, .menu-toggle span::after { content: ""; position: absolute; left: 0; }
+  .menu-toggle span::before { top: -6px; }
+  .menu-toggle span::after { top: 6px; }
+  .menu-open .menu-toggle span { background: transparent; }
+  .menu-open .menu-toggle span::before { transform: translateY(6px) rotate(45deg); }
+  .menu-open .menu-toggle span::after { transform: translateY(-6px) rotate(-45deg); }
+  @media (max-width: 380px) { .header .btn-sm { padding: 0 14px; font-size: .85rem; } .logo { font-size: 1.1rem; } }
+
+  .mobile-menu {
+    position: fixed; inset: var(--header-h) 0 auto 0; z-index: 49;
+    background: rgba(7, 9, 13, .97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px var(--gutter) 28px;
+    transform: translateY(-12px); opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease;
+  }
+  .menu-open .mobile-menu { opacity: 1; transform: none; pointer-events: auto; }
+  .mobile-menu a:not(.btn) { display: block; padding: 14px 0; border-bottom: 1px solid var(--border); font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; }
+  .mobile-menu .btn { width: 100%; margin-top: 20px; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: calc(var(--header-h) + 72px) 0 80px; overflow: hidden; isolation: isolate; }
+  .hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 75%);
+  }
+  .hero-glow {
+    position: absolute; width: 760px; height: 760px; left: 50%; top: -340px; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(var(--accent-rgb), .28) 0%, rgba(var(--accent-rgb), .06) 40%, transparent 68%);
+    filter: blur(10px);
+    animation: pulse 9s ease-in-out infinite;
+  }
+  .hero-beam {
+    position: absolute; top: 0; left: 50%; width: 2px; height: 70%;
+    background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb), .7), transparent);
+    transform: translateX(-50%) rotate(18deg); transform-origin: top; opacity: .35; filter: blur(1px);
+  }
+  .hero-beam.b2 { transform: translateX(-50%) rotate(-24deg); opacity: .2; height: 60%; }
+  @keyframes pulse { 0%, 100% { opacity: .85; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.08); } }
+
+  .hero-inner { text-align: center; max-width: 960px; margin: 0 auto; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 8px; border-radius: 999px;
+    border: 1px solid var(--border-strong); background: rgba(255,255,255,.03);
+    font-size: .85rem; color: var(--muted); margin-bottom: 28px;
+  }
+  .badge-dot { width: 22px; height: 22px; border-radius: 50%; background: rgba(var(--accent-rgb), .15); display: grid; place-items: center; }
+  .badge-dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .hero h1 .line-accent {
+    background: linear-gradient(100deg, var(--accent) 0%, #ffffff 120%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-sub { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--muted); max-width: 640px; margin: 24px auto 0; }
+  .hero-ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 38px; }
+  .hero-ctas .btn { width: 100%; }
+  .hero-note { margin-top: 22px; font-size: .88rem; color: var(--dim); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+  .hero-note span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-note svg { width: 15px; height: 15px; color: var(--accent); }
+
+  /* ---------- Trust bar ---------- */
+  .trust { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 30px 12px; text-align: center; position: relative; }
+  .stat:nth-child(odd)::after { content: ""; position: absolute; right: 0; top: 24%; height: 52%; width: 1px; background: var(--border); }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 5vw, 2.4rem); color: var(--text); letter-spacing: -0.02em; }
+  .stat-num .ph { color: var(--accent); }
+  .stat-label { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+  .placeholder-tag {
+    display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+    color: var(--dim); border: 1px dashed var(--border-strong); border-radius: 6px; padding: 2px 7px; margin-top: 8px;
+  }
+
+  /* ---------- Intro ---------- */
+  .intro-grid { display: grid; gap: 40px; }
+  .intro-lead { font-family: var(--font-display); font-size: clamp(1.45rem, 3.6vw, 2.2rem); line-height: 1.3; font-weight: 500; letter-spacing: -0.015em; }
+  .intro-lead strong { color: var(--accent); font-weight: 600; }
+  .intro-body p { color: var(--muted); font-size: 1.06rem; }
+  .intro-body p + p { margin-top: 18px; }
+  .pain-list { list-style: none; margin-top: 26px; display: grid; gap: 12px; }
+  .pain-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--text); }
+  .pain-list li svg { width: 20px; height: 20px; color: #ff6b6b; flex: none; margin-top: 3px; }
+
+  /* ---------- Services ---------- */
+  .services { background: linear-gradient(to bottom, var(--bg), var(--bg-2)); }
+  .cards { display: grid; gap: 16px; }
+  .card {
+    position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 30px 26px; overflow: hidden; transition: border-color .3s ease, transform .3s ease, background .3s ease;
+  }
+  .card::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(var(--accent-rgb), .12), transparent 45%);
+  }
+  .card:hover { border-color: rgba(var(--accent-rgb), .35); transform: translateY(-4px); }
+  .card:hover::before { opacity: 1; }
+  .icon {
+    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 22px;
+    background: rgba(var(--accent-rgb), .1); border: 1px solid rgba(var(--accent-rgb), .25); color: var(--accent);
+  }
+  .icon svg { width: 26px; height: 26px; }
+  .card h3 { margin-bottom: 6px; }
+  .card .kicker { font-family: var(--font-display); font-weight: 500; color: var(--accent); font-size: .98rem; margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: .98rem; }
+  .card-num { position: absolute; top: 24px; right: 24px; font-family: var(--font-display); font-size: .85rem; color: var(--dim); }
+
+  /* ---------- Process ---------- */
+  .steps { display: grid; gap: 16px; counter-reset: step; position: relative; }
+  .step { position: relative; padding: 28px 26px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-2); }
+  .step-num {
+    font-family: var(--font-display); font-weight: 700; font-size: 3.2rem; line-height: 1; letter-spacing: -0.04em;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(var(--accent-rgb), .7); margin-bottom: 18px;
+  }
+  .step h3 { margin-bottom: 10px; }
+  .step p { color: var(--muted); font-size: .97rem; }
+  .step .duration { display: inline-block; margin-top: 16px; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+  /* ---------- Results ---------- */
+  .results { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .result-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 26px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .result-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .chip { font-size: .78rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid var(--border-strong); color: var(--muted); }
+  .result-metric { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 4.6vw, 2.1rem); line-height: 1.15; letter-spacing: -0.02em; }
+  .result-card p { color: var(--muted); font-size: .97rem; }
+  .spark { height: 64px; width: 100%; }
+  .result-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid var(--border); padding-top: 18px; margin-top: auto; }
+  .result-meta div { font-size: .82rem; color: var(--dim); }
+  .result-meta strong { display: block; color: var(--text); font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
+  .note { margin-top: 26px; font-size: .88rem; color: var(--dim); text-align: center; }
+
+  /* ---------- Why ---------- */
+  .why-grid { display: grid; gap: 48px; align-items: start; }
+  .why-list { display: grid; gap: 14px; }
+  .why-item { display: flex; gap: 18px; padding: 22px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-2); transition: border-color .3s ease; }
+  .why-item:hover { border-color: rgba(var(--accent-rgb), .35); }
+  .why-item .check { width: 34px; height: 34px; border-radius: 10px; flex: none; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); }
+  .why-item .check svg { width: 18px; height: 18px; }
+  .why-item h4 { font-size: 1.12rem; margin-bottom: 6px; }
+  .why-item p { color: var(--muted); font-size: .96rem; }
+  .compare { border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-top: 34px; }
+  .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .compare-row > div { padding: 14px 16px; font-size: .92rem; border-top: 1px solid var(--border); }
+  .compare-row > div:first-child { color: var(--dim); border-right: 1px solid var(--border); }
+  .compare-row > div:last-child { color: var(--text); }
+  .compare-head > div { font-family: var(--font-display); font-weight: 600; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; border-top: 0; background: var(--surface); }
+  .compare-head > div:last-child { color: var(--accent); }
+
+  /* ---------- Testimonials ---------- */
+  .quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 26px; display: flex; flex-direction: column; gap: 22px; }
+  .quote-mark { width: 34px; height: 34px; color: var(--accent); }
+  .quote-card blockquote { font-size: 1.05rem; line-height: 1.6; color: var(--text); }
+  .quote-person { display: flex; align-items: center; gap: 14px; margin-top: auto; }
+  .avatar { width: 46px; height: 46px; border-radius: 50%; flex: none; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; color: var(--accent-ink); background: var(--accent); }
+  .quote-person strong { display: block; font-family: var(--font-display); font-weight: 600; }
+  .quote-person span { font-size: .87rem; color: var(--dim); }
+  .stars { display: flex; gap: 3px; color: var(--accent); }
+  .stars svg { width: 16px; height: 16px; }
+
+  /* ---------- CTA + Form ---------- */
+  .cta { overflow: hidden; isolation: isolate; }
+  .cta-glow { position: absolute; z-index: -1; width: 900px; height: 900px; right: -300px; bottom: -420px; background: radial-gradient(circle, rgba(var(--accent-rgb), .18), transparent 62%); pointer-events: none; }
+  .cta-grid { display: grid; gap: 48px; }
+  .cta-copy h2 { font-size: clamp(2.2rem, 6vw, 3.9rem); }
+  .cta-copy > p { color: var(--muted); font-size: 1.08rem; margin-top: 20px; max-width: 520px; }
+  .cta-points { list-style: none; display: grid; gap: 12px; margin: 28px 0 32px; }
+  .cta-points li { display: flex; gap: 12px; align-items: flex-start; }
+  .cta-points svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 3px; }
+  .cta-actions { display: flex; flex-direction: column; gap: 12px; }
+  .cta-actions .btn { width: 100%; }
+  .whatsapp-btn { border-color: rgba(37, 211, 102, .45); }
+  .whatsapp-btn:hover { border-color: #25d366; color: #25d366; }
+
+  .form { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 22px; padding: 28px 22px; box-shadow: 0 30px 80px -30px rgba(0,0,0,.7); }
+  .form h3 { font-size: 1.45rem; margin-bottom: 6px; }
+  .form-fields > p { color: var(--muted); font-size: .94rem; margin-bottom: 24px; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .field label { font-size: .86rem; font-weight: 500; color: var(--muted); }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 12px;
+    padding: 14px 15px; font-size: 16px; /* 16px stops iOS zoom */ transition: border-color .2s ease, box-shadow .2s ease; appearance: none; -webkit-appearance: none;
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%239aa5b5' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
+  }
+  .field select option { background: var(--surface); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--dim); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .12); }
+  .field-row { display: grid; gap: 0 14px; }
+  .form .btn { width: 100%; margin-top: 6px; }
+  .form-foot { margin-top: 14px; font-size: .82rem; color: var(--dim); text-align: center; }
+  .form-success { display: none; text-align: center; padding: 40px 10px; }
+  .form-success .icon { margin: 0 auto 20px; }
+  .form-success h3 { margin-bottom: 10px; }
+  .form-success p { color: var(--muted); }
+  .form.sent .form-fields { display: none; }
+  .form.sent .form-success { display: block; }
+
+  /* ---------- Footer ---------- */
+  .footer { border-top: 1px solid var(--border); padding: 60px 0 30px; background: var(--bg-2); }
+  .footer-grid { display: grid; gap: 40px; }
+  .footer-brand p { color: var(--muted); font-size: .95rem; margin-top: 16px; max-width: 340px; }
+  .footer h4 { font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 16px; font-weight: 600; }
+  .footer-links { list-style: none; display: grid; gap: 10px; }
+  .footer-links a { color: var(--muted); font-size: .95rem; transition: color .2s ease; }
+  .footer-links a:hover { color: var(--accent); }
+  .socials { display: flex; gap: 10px; margin-top: 4px; }
+  .socials a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; border: 1px solid var(--border-strong); color: var(--muted); transition: color .2s ease, border-color .2s ease, transform .2s ease; }
+  .socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .socials svg { width: 19px; height: 19px; }
+  .footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; font-size: .85rem; color: var(--dim); }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+  .reveal.in { opacity: 1; transform: none; }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* =================== Breakpoints =================== */
+  @media (min-width: 560px) {
+    .hero-ctas, .cta-actions { flex-direction: row; justify-content: center; }
+    .hero-ctas .btn, .cta-actions .btn { width: auto; }
+    .cta-actions { justify-content: flex-start; }
+    .field-row { grid-template-columns: 1fr 1fr; }
+    .form { padding: 36px 32px; }
+  }
+  @media (min-width: 720px) {
+    :root { --gutter: 32px; }
+    .section { padding: 112px 0; }
+    .cards, .steps, .result-grid, .quote-grid { grid-template-columns: repeat(2, 1fr); }
+    .result-grid, .quote-grid { display: grid; gap: 16px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .stat:nth-child(-n+2) { border-bottom: 0; }
+    .stat:not(:last-child)::after { content: ""; position: absolute; right: 0; top: 24%; height: 52%; width: 1px; background: var(--border); }
+    .stat { padding: 40px 12px; }
+    .footer-grid { grid-template-columns: 1.6fr 1fr 1fr; }
+    .footer-bottom { flex-direction: row; justify-content: space-between; }
+  }
+  @media (max-width: 719px) {
+    .result-grid, .quote-grid { display: grid; gap: 16px; }
+  }
+  @media (min-width: 980px) {
+    :root { --header-h: 76px; }
+    .nav-links { display: flex; }
+    .menu-toggle, .mobile-menu { display: none; }
+    .hero { padding: calc(var(--header-h) + 110px) 0 120px; }
+    .intro-grid { grid-template-columns: 1.1fr 1fr; gap: 72px; align-items: start; }
+    .cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .steps { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .steps::before {
+      content: ""; position: absolute; top: 60px; left: 6%; right: 6%; height: 1px; z-index: -1;
+      background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), .5), transparent);
+    }
+    .result-grid, .quote-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .why-grid { grid-template-columns: 1fr 1.1fr; gap: 72px; }
+    .why-sticky { position: sticky; top: calc(var(--header-h) + 40px); }
+    .cta-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .card, .step, .result-card, .quote-card { padding: 34px 30px; }
+  }
+</style>
+</head>
+<body class="no-js">
+
+<!-- =====================================================================
+     PLACEHOLDERS TO REPLACE (search for "[" in this file):
+     [CALENDLY_LINK], [WHATSAPP_LINK], [EMAIL], [INSTAGRAM_LINK],
+     [FACEBOOK_LINK], [LINKEDIN_LINK], [TIKTOK_LINK], [FORM_ENDPOINT],
+     all [X] stats, case-study results, and testimonials.
+     ===================================================================== -->
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="top">
+  <div class="container">
+    <a href="#top" class="logo" aria-label="Media Beem home">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="var(--accent)"/>
+        <path d="M8 23 L16 9 L24 23" stroke="#04120a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="9" r="2.4" fill="#04120a"/>
+      </svg>
+      Media Beem
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#results">Results</a>
+      <a href="#why">Why Us</a>
+      <a href="#testimonials">Clients</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-primary btn-sm hide-xs">Book a Call</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#process">Process</a>
+  <a href="#results">Results</a>
+  <a href="#why">Why Media Beem</a>
+  <a href="#testimonials">Clients</a>
+  <a href="#contact" class="btn btn-primary">Book a Call</a>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-beam"></div>
+    <div class="hero-beam b2"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="badge reveal"><span class="badge-dot"></span>Performance marketing for e-commerce brands</div>
+    <h1 class="reveal" style="--d:.08s">Scale your store.<br><span class="line-accent">Not your ad bill.</span></h1>
+    <p class="hero-sub reveal" style="--d:.16s">We build Meta ads, creative and automation systems that turn ad spend into profitable orders — every single month.</p>
+    <div class="hero-ctas reveal" style="--d:.24s">
+      <a href="#contact" class="btn btn-primary">Book a Free Strategy Call
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#services" class="btn btn-ghost">See What We Do</a>
+    </div>
+    <div class="hero-note reveal" style="--d:.32s">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Profit-first strategy</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No long lock-in contracts</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Transparent reporting</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<section class="trust" aria-label="Media Beem in numbers">
+  <div class="container">
+    <div class="stats">
+      <div class="stat reveal">
+        <div class="stat-num"><span class="ph">[X]</span>+</div>
+        <div class="stat-label">Brands Scaled</div>
+        <span class="placeholder-tag">Placeholder</span>
+      </div>
+      <div class="stat reveal" style="--d:.08s">
+        <div class="stat-num">Rs <span class="ph">[X]</span>+</div>
+        <div class="stat-label">Ad Spend Managed</div>
+        <span class="placeholder-tag">Placeholder</span>
+      </div>
+      <div class="stat reveal" style="--d:.16s">
+        <div class="stat-num"><span class="ph">[X]</span>x</div>
+        <div class="stat-label">Average ROAS</div>
+        <span class="placeholder-tag">Placeholder</span>
+      </div>
+      <div class="stat reveal" style="--d:.24s">
+        <div class="stat-num"><span class="ph">[X]</span>+</div>
+        <div class="stat-label">Orders/Day Generated</div>
+        <span class="placeholder-tag">Placeholder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="section" id="intro">
+  <div class="container intro-grid">
+    <div class="reveal">
+      <span class="eyebrow">Why brands stall</span>
+      <p class="intro-lead">Most e-commerce brands don't have an ad problem. They have a <strong>strategy problem</strong> — and no amount of boosted posts or new campaigns will fix it.</p>
+    </div>
+    <div class="intro-body reveal" style="--d:.1s">
+      <p>Spend creeps up, ROAS creeps down, and every "scaling" attempt kills profitability. Campaigns get launched on gut feel, creatives burn out in a week, and half the customers who reach checkout never come back. That's not a growth engine — that's a slot machine.</p>
+      <p>Media Beem replaces random acts of marketing with one connected system: a clear media plan, a steady pipeline of creatives built to convert, influencer content that earns trust, and automation that recovers the revenue you're already paying to attract. Every decision ties back to one number — profit.</p>
+      <ul class="pain-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Rising CPAs and ROAS that collapses the moment you scale budget</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Creative fatigue with no system to replace winning ads</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Abandoned checkouts and one-time buyers leaking revenue every day</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Six pillars. One goal: <span class="accent">profitable growth.</span></h2>
+      <p>Each pillar works on its own — together, they compound. We plug into your brand where the leverage is highest and build from there.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card-num">01</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/><path d="M15 7h5v5"/></svg></div>
+        <h3>Meta Ads Management</h3>
+        <p class="kicker">Spend that earns its keep.</p>
+        <p>Full-funnel Facebook and Instagram campaigns built on clean account structure, tight testing frameworks and daily optimization. We manage to contribution margin — not platform-reported vanity ROAS.</p>
+      </article>
+
+      <article class="card reveal" style="--d:.06s">
+        <span class="card-num">02</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m10 8 6 4-6 4V8z"/></svg></div>
+        <h3>Creative Strategy &amp; Ad Creatives</h3>
+        <p class="kicker">Creative is the targeting now.</p>
+        <p>Research-led angles, hooks and scripts turned into static, video and UGC-style ads. We test fast, kill losers early and iterate on winners so your account never runs dry of fresh, converting creative.</p>
+      </article>
+
+      <article class="card reveal" style="--d:.12s">
+        <span class="card-num">03</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/><path d="M17 11l2 2 4-4"/></svg></div>
+        <h3>Influencer Marketing</h3>
+        <p class="kicker">Borrowed trust, real sales.</p>
+        <p>We find creators whose audiences actually buy, brief them on what converts and turn their content into paid ad assets. Influencer marketing measured on orders — not likes and reach.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-num">04</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H5.2L4 17.2V4z"/><path d="M8 9h8M8 12h5"/><path d="M14 20h6"/></svg></div>
+        <h3>Marketing Automation</h3>
+        <p class="kicker">Recover what you already paid for.</p>
+        <p>Abandoned checkout recovery, welcome flows, post-purchase and win-back sequences across email, SMS and WhatsApp. Automated revenue that works 24/7 and lifts the value of every customer you acquire.</p>
+      </article>
+
+      <article class="card reveal" style="--d:.06s">
+        <span class="card-num">05</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg></div>
+        <h3>Scaling Strategy</h3>
+        <p class="kicker">Grow budget without breaking margin.</p>
+        <p>A clear roadmap for when, where and how to scale — horizontal and vertical budget moves, offer and AOV strategy, and unit economics that tell you exactly how much you can afford to pay for a customer.</p>
+      </article>
+
+      <article class="card reveal" style="--d:.12s">
+        <span class="card-num">06</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M7 13h4M7 17h8"/></svg></div>
+        <h3>Content Strategy</h3>
+        <p class="kicker">Organic that feeds paid.</p>
+        <p>A content plan that builds your brand on social and doubles as a testing ground for ad angles. What wins organically gets amplified with spend — so every piece of content pulls double duty.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How we work</span>
+      <h2>A simple process. <span class="accent">Ruthlessly executed.</span></h2>
+      <p>No 40-page decks, no six-month "discovery phase." Here's exactly how we take you from where you are to where the numbers should be.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Audit</h3>
+        <p>We dig into your ad account, creatives, funnel, site and unit economics to find exactly where money is leaking and where the upside is.</p>
+        <span class="duration">Week 1</span>
+      </div>
+      <div class="step reveal" style="--d:.08s">
+        <div class="step-num">02</div>
+        <h3>Strategy</h3>
+        <p>You get a clear plan: target CPA and ROAS, campaign structure, creative angles, offers and automation priorities — tied to your margins.</p>
+        <span class="duration">Week 1–2</span>
+      </div>
+      <div class="step reveal" style="--d:.16s">
+        <div class="step-num">03</div>
+        <h3>Execution</h3>
+        <p>We launch campaigns, ship creatives, activate influencers and build your flows — then test aggressively to find what actually moves orders.</p>
+        <span class="duration">Week 2–6</span>
+      </div>
+      <div class="step reveal" style="--d:.24s">
+        <div class="step-num">04</div>
+        <h3>Scale</h3>
+        <p>Once the winners are proven, we push budget with discipline — protecting profitability while growing order volume month over month.</p>
+        <span class="duration">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="section results" id="results">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Results</span>
+      <h2>Numbers, <span class="accent">not promises.</span></h2>
+      <p>A snapshot of what a connected strategy does for e-commerce brands. Real numbers, real stores, real profit.</p>
+    </div>
+
+    <div class="result-grid">
+      <article class="result-card reveal">
+        <div class="result-top"><span class="chip">[BRAND CATEGORY]</span><span class="placeholder-tag" style="margin:0">Placeholder</span></div>
+        <svg class="spark" viewBox="0 0 300 64" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 58 C40 56 60 50 90 46 S150 36 180 28 S240 12 300 4" stroke="var(--accent)" stroke-width="2.5"/>
+          <path d="M0 58 C40 56 60 50 90 46 S150 36 180 28 S240 12 300 4 V64 H0Z" fill="rgba(var(--accent-rgb), .1)"/>
+        </svg>
+        <div class="result-metric">Scaled from <span class="ph">[X]</span> to <span class="ph">[X]</span> orders/day</div>
+        <p>[Short summary of the challenge, what we changed, and the outcome — e.g. restructured account, launched new creative angles, scaled budget.]</p>
+        <div class="result-meta">
+          <div><strong class="ph">[X]x</strong>ROAS</div>
+          <div><strong class="ph">[X] months</strong>Timeframe</div>
+        </div>
+      </article>
+
+      <article class="result-card reveal" style="--d:.08s">
+        <div class="result-top"><span class="chip">[BRAND CATEGORY]</span><span class="placeholder-tag" style="margin:0">Placeholder</span></div>
+        <svg class="spark" viewBox="0 0 300 64" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 54 L50 50 L100 44 L150 40 L200 26 L250 18 L300 8" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M0 54 L50 50 L100 44 L150 40 L200 26 L250 18 L300 8 V64 H0Z" fill="rgba(var(--accent-rgb), .1)"/>
+        </svg>
+        <div class="result-metric">Recovered Rs <span class="ph">[X]</span> in abandoned checkouts</div>
+        <p>[Short summary of the automation setup — e.g. WhatsApp + email recovery flows, timing, offers — and the revenue it brought back.]</p>
+        <div class="result-meta">
+          <div><strong class="ph">[X]%</strong>Recovery rate</div>
+          <div><strong class="ph">[X] days</strong>Timeframe</div>
+        </div>
+      </article>
+
+      <article class="result-card reveal" style="--d:.16s">
+        <div class="result-top"><span class="chip">[BRAND CATEGORY]</span><span class="placeholder-tag" style="margin:0">Placeholder</span></div>
+        <svg class="spark" viewBox="0 0 300 64" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 20 C50 22 80 30 120 34 S200 46 300 52" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4 5" opacity=".7"/>
+          <path d="M0 50 C60 46 100 36 150 30 S240 14 300 10" stroke="var(--accent)" stroke-width="2.5"/>
+        </svg>
+        <div class="result-metric">Cut CPA by <span class="ph">[X]%</span> while scaling spend <span class="ph">[X]x</span></div>
+        <p>[Short summary — e.g. new creative testing system and influencer content brought acquisition cost down as budget went up.]</p>
+        <div class="result-meta">
+          <div><strong class="ph">Rs [X]</strong>New CPA</div>
+          <div><strong class="ph">[X] months</strong>Timeframe</div>
+        </div>
+      </article>
+    </div>
+    <p class="note reveal">Case studies above are placeholders — replace with real client results.</p>
+  </div>
+</section>
+
+<!-- ============ WHY MEDIA BEEM ============ -->
+<section class="section" id="why">
+  <div class="container why-grid">
+    <div class="why-sticky reveal">
+      <span class="eyebrow">Why Media Beem</span>
+      <h2>Built for brands that care about <span class="accent">profit</span>, not applause.</h2>
+      <p style="color:var(--muted); font-size:1.08rem; margin-top:18px;">Plenty of agencies can spend your money. Very few can show you exactly what it earned. We're the second kind.</p>
+
+      <div class="compare" role="table" aria-label="Typical agency vs Media Beem">
+        <div class="compare-row compare-head" role="row"><div role="columnheader">Typical agency</div><div role="columnheader">Media Beem</div></div>
+        <div class="compare-row" role="row"><div role="cell">Reports reach &amp; clicks</div><div role="cell">Reports profit &amp; orders</div></div>
+        <div class="compare-row" role="row"><div role="cell">Media buyers only</div><div role="cell">Data + creative, one team</div></div>
+        <div class="compare-row" role="row"><div role="cell">Set it and forget it</div><div role="cell">Tested &amp; optimized daily</div></div>
+        <div class="compare-row" role="row"><div role="cell">Long lock-in contracts</div><div role="cell">Earn your business monthly</div></div>
+      </div>
+    </div>
+
+    <div class="why-list">
+      <div class="why-item reveal">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Profit-focused, always</h4><p>We start with your margins and work backwards. Every campaign has a target CPA built on your real unit economics — so growth never comes at the cost of your bottom line.</p></div>
+      </div>
+      <div class="why-item reveal" style="--d:.06s">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Data and creative under one roof</h4><p>Media buying and creative strategy aren't separate departments here. Performance data drives what we make, and what we make drives performance. That loop is where scale comes from.</p></div>
+      </div>
+      <div class="why-item reveal" style="--d:.12s">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>No fluff, no smoke and mirrors</h4><p>Straight answers, clear reporting and honest recommendations — even when that means telling you to spend less. If something isn't working, you'll hear it from us first.</p></div>
+      </div>
+      <div class="why-item reveal" style="--d:.18s">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>E-commerce specialists</h4><p>We don't do a bit of everything for everyone. We live in Meta Ads Manager, Shopify dashboards and checkout data — and we understand what makes online shoppers buy.</p></div>
+      </div>
+      <div class="why-item reveal" style="--d:.24s">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Senior hands on your account</h4><p>The people on your strategy call are the people running your ads. No hand-offs to juniors, no account managers relaying messages.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section results" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Client words</span>
+      <h2>Don't take <span class="accent">our</span> word for it.</h2>
+    </div>
+
+    <div class="quote-grid">
+      <figure class="quote-card reveal">
+        <div class="stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        </div>
+        <blockquote>"[CLIENT TESTIMONIAL — add a real quote from a client about their results working with Media Beem.]"</blockquote>
+        <figcaption class="quote-person">
+          <div class="avatar">[A]</div>
+          <div><strong>[CLIENT NAME]</strong><span>[Role], [Brand Name]</span></div>
+        </figcaption>
+        <span class="placeholder-tag" style="align-self:flex-start; margin:0">Placeholder</span>
+      </figure>
+
+      <figure class="quote-card reveal" style="--d:.08s">
+        <div class="stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        </div>
+        <blockquote>"[CLIENT TESTIMONIAL — add a real quote from a client about their results working with Media Beem.]"</blockquote>
+        <figcaption class="quote-person">
+          <div class="avatar">[B]</div>
+          <div><strong>[CLIENT NAME]</strong><span>[Role], [Brand Name]</span></div>
+        </figcaption>
+        <span class="placeholder-tag" style="align-self:flex-start; margin:0">Placeholder</span>
+      </figure>
+
+      <figure class="quote-card reveal" style="--d:.16s">
+        <div class="stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        </div>
+        <blockquote>"[CLIENT TESTIMONIAL — add a real quote from a client about their results working with Media Beem.]"</blockquote>
+        <figcaption class="quote-person">
+          <div class="avatar">[C]</div>
+          <div><strong>[CLIENT NAME]</strong><span>[Role], [Brand Name]</span></div>
+        </figcaption>
+        <span class="placeholder-tag" style="align-self:flex-start; margin:0">Placeholder</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA + FORM ============ -->
+<section class="section cta" id="contact">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="container cta-grid">
+    <div class="cta-copy reveal">
+      <span class="eyebrow">Let's talk growth</span>
+      <h2>Ready to scale <span class="accent">profitably?</span></h2>
+      <p>Book a free 30-minute strategy call. We'll look at your numbers, show you where the growth is hiding, and tell you honestly whether we're the right fit.</p>
+      <ul class="cta-points">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A quick review of your ad account and funnel</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>2–3 concrete opportunities you can act on immediately</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Zero pressure, zero obligation</li>
+      </ul>
+      <div class="cta-actions">
+        <a href="[CALENDLY_LINK]" class="btn btn-primary" target="_blank" rel="noopener">Book a Free Strategy Call
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="[WHATSAPP_LINK]" class="btn btn-ghost whatsapp-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:19px;height:19px"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zm8.3-18.1C18.1 1.5 15.2.3 12 .3 5.5.3.3 5.5.3 12c0 2.1.5 4.1 1.6 5.9L.2 23.8l6.1-1.6c1.7.9 3.7 1.4 5.7 1.4 6.5 0 11.7-5.2 11.7-11.7 0-3.1-1.2-6-3.4-8.2z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact form: set the action to your form handler, e.g. Formspree / Google Apps Script -->
+    <form class="form reveal" id="contact-form" action="[FORM_ENDPOINT]" method="POST" style="--d:.1s" novalidate>
+      <div class="form-fields">
+        <h3>Get your free strategy call</h3>
+        <p>Tell us about your brand. We reply within one business day.</p>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" placeholder="Full name" autocomplete="name" required />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="contact-info">Email or WhatsApp</label>
+            <input id="contact-info" name="contact" type="text" placeholder="you@brand.com or +92…" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="brand">Brand name</label>
+            <input id="brand" name="brand" type="text" placeholder="Your store" autocomplete="organization" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="revenue">Monthly revenue</label>
+          <select id="revenue" name="revenue" required>
+            <option value="" disabled selected>Select a range</option>
+            <option>Under Rs 1M</option>
+            <option>Rs 1M – 5M</option>
+            <option>Rs 5M – 15M</option>
+            <option>Rs 15M – 50M</option>
+            <option>Rs 50M+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">What do you want to achieve?</label>
+          <textarea id="message" name="message" placeholder="Current ad spend, main challenges, goals for the next 90 days…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Book My Free Strategy Call
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="form-foot">Prefer email? Reach us at <a href="mailto:[EMAIL]" class="accent">[EMAIL]</a></p>
+      </div>
+      <div class="form-success" role="status" aria-live="polite">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Got it — talk soon.</h3>
+        <p>Thanks for reaching out. We'll review your details and get back to you within one business day.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="var(--accent)"/>
+            <path d="M8 23 L16 9 L24 23" stroke="#04120a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="9" r="2.4" fill="#04120a"/>
+          </svg>
+          Media Beem
+        </a>
+        <p>Performance marketing for e-commerce brands that want to scale profitably. Meta ads, creative, influencers and automation — built around your bottom line.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#why">Why Media Beem</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow us</h4>
+        <div class="socials">
+          <a href="[INSTAGRAM_LINK]" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="[FACEBOOK_LINK]" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.2H8v3.3h2.6V22H14v-10.2h2.6l.4-3.3H14z"/></svg>
+          </a>
+          <a href="[LINKEDIN_LINK]" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9.5z"/></svg>
+          </a>
+          <a href="[TIKTOK_LINK]" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.3v13.3a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.2 6.2 0 1 0 5.3 6.2V8.6a7.8 7.8 0 0 0 4.4 1.4V6.7a4.5 4.5 0 0 1-4.4-4.7z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> Media Beem. All rights reserved.</span>
+      <span>Built for brands that measure what matters.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    document.body.classList.remove('no-js');
+
+    // Sticky header background on scroll
+    var header = document.querySelector('.header');
+    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 12); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile menu
+    var toggle = document.querySelector('.menu-toggle');
+    var setMenu = function (open) {
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open);
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    toggle.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+    document.querySelectorAll('.mobile-menu a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+    // Scroll reveal
+    var items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add('in'); });
+    }
+
+    // Cursor-follow glow on service cards
+    document.querySelectorAll('.card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    // Contact form: validates, then posts to [FORM_ENDPOINT] if set, else shows success state
+    var form = document.getElementById('contact-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var endpoint = form.getAttribute('action');
+      var done = function () { form.classList.add('sent'); };
+      if (endpoint && endpoint.indexOf('[') !== 0) {
+        fetch(endpoint, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+          .then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
